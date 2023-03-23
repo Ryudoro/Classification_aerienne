@@ -11,3 +11,7 @@
 
 #Une fois le repertoire créé, il suffit d'utiliser le script test_DL_2.py afin de créer un modèle de deeplearning
 #stocké dans un fichier "vehicule_classifier.h5"
+
+
+#Pour ce qui est du fichier filtre.py, il est pour l'instant prévu uniquement pour des images dans un sous-dossier présent dans le même dossier.
+#Il est optimisé pour une seule route (sauf si elles sont reliées)
