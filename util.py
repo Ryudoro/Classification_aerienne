@@ -507,7 +507,7 @@ def prediction(im, classification_model, detection_model, transformes, device):
         roi_image = Image.fromarray(roi)
 
         # Application des transformations à la ROI en utilisant torchvision.transforms
-        roi_image_transformed = transformes(roi_image)  # Remplacez YOUR_TRANSFORMS par vos transformations spécifiques
+        roi_image_transformed = transformes(roi_image)  # Attention à ce que les transformations correspondent à ceux utiliser pour l'entraînement
 
         # Conversion de l'image transformée en tenseur
         roi_image_tensor = roi_image_transformed.unsqueeze(0)  # Ajout d'une dimension batch
