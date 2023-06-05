@@ -3,7 +3,7 @@ import cv2
 import pandas as pd
 import xml.etree.ElementTree as ET
 
-def extract_image_regions(df, roi_shape=(64, 64), output_dir='bbox_imgs', csv_file='labels.csv'):
+def extract_image_regions(df, output_dir='bbox_imgs', csv_file='labels.csv'):
     # Créer le dossier pour enregistrer les images de boîtes englobantes
     os.makedirs(output_dir, exist_ok=True)
 
@@ -91,4 +91,4 @@ def create_annotation_dataframe(path):
 vaid_final = create_annotation_dataframe('labels/')
 
 # On extrait les bndbox en les enregistrant dans un dossier nommé 'bbox_imgs' et un csv 'labels.csv'
-extract_image_regions(vaid_final, roi_shape=(128, 128), output_dir='bbox_imgs', csv_file='labels.csv')
+extract_image_regions(vaid_final,  output_dir='bbox_imgs', csv_file='labels.csv')
