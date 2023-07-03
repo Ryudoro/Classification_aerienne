@@ -13,14 +13,13 @@ import torch.nn as nn
 from torchvision import datasets, models
 import torch.optim as optim
 
-
-
 import torchvision.transforms as transforms
 
 import cv2
 import pandas as pd
+import numpy as np
+
 from PIL import Image
-from tqdm.notebook import tqdm
 
 
 def get_cfg(output_dir, learning_rate, batch_size, iterations, checkpoint_period, model, device, nmr_classes):
@@ -299,13 +298,6 @@ def get_transform():
                         ])
     return transformes
 
-from torch.utils.data import Dataset
-from PIL import Image
-
-from torch.utils.data import Dataset
-from PIL import Image
-import cv2
-import numpy as np
 
 def preprocess_image(image_path):
     """
