@@ -299,34 +299,6 @@ def get_transform():
     return transformes
 
 
-def preprocess_image(image_path):
-    """
-    Effectue le prétraitement de l'image.
-
-    Args:
-        image_path (str): Chemin de l'image à prétraiter.
-
-    Returns:
-        PIL.Image: Image prétraitée.
-    """
-    # Charger l'image en couleur avec OpenCV
-    image = cv2.imread(image_path)
-
-    # Redimensionner l'image en forme carrée sans déformation
-    size = max(image.shape[:2])
-    resized_image = np.zeros((size, size, 3), dtype=np.uint8)  # Ajouter un troisième canal pour la couleur
-    start_h = (size - image.shape[0]) // 2
-    start_w = (size - image.shape[1]) // 2
-    resized_image[start_h:start_h+image.shape[0], start_w:start_w+image.shape[1], :] = image  # Copier tous les canaux
-
-    # Redimensionner l'image à la taille cible
-    target_size = (64, 64)  # Taille cible pour l'image prétraitée
-    resized_image = cv2.resize(resized_image, target_size, interpolation=cv2.INTER_AREA)
-
-    # Convertir l'image en objet PIL Image et convertir l'espace de couleur en RGB
-    preprocessed_image = Image.fromarray(cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB))
-
-    return preprocessed_image
 
 def preprocess_image_detectron(image):
     """
@@ -354,6 +326,8 @@ def preprocess_image_detectron(image):
     preprocessed_image = Image.fromarray(cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB))
 
     return preprocessed_image
+
+
 
 class VaidVehiculeDataset_test(Dataset):
     """
@@ -416,67 +390,6 @@ class VaidVehiculeDataset_test(Dataset):
             preprocessed_image = self.transform(preprocessed_image)
 
         return preprocessed_image, label
-
-
-
-
-class VaidVehiculeDataset(Dataset):
-    """
-    Dataset personnalisé pour les données de validation des véhicules.
-
-    Args:
-        annotations_file (str): Chemin vers le fichier d'annotations.
-        img_dir (str): Répertoire contenant les images.
-        transformes (callable, optional): Transformations à appliquer aux images.
-
-    Attributes:
-        img_labels (DataFrame): Données d'annotations des images.
-        img_dir (str): Répertoire des images.
-        transform (callable): Transformations à appliquer aux images.
-    """
-
-    def __init__(self, annotations_file, img_dir, transformes=None):
-        """
-        Initialise le dataset de validation des véhicules.
-
-        Args:
-            annotations_file (str): Chemin vers le fichier d'annotations.
-            img_dir (str): Répertoire contenant les images.
-            transformes (callable, optional): Transformations à appliquer aux images.
-        """
-        self.img_labels = pd.read_csv(annotations_file)
-        self.img_dir = img_dir
-        self.transform = transformes
-
-    def __len__(self):
-        """
-        Retourne la taille du dataset (nombre d'images).
-
-        Returns:
-            int: Taille du dataset.
-        """
-        return len(self.img_labels)
-
-    def __getitem__(self, idx):
-        """
-        Récupère un élément du dataset à partir de son index.
-
-        Args:
-            idx (int): Index de l'élément à récupérer.
-
-        Returns:
-            tuple: Tuple contenant l'image et son label correspondant.
-        """
-        if torch.is_tensor(idx):
-            idx = idx.tolist()
-
-        img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])
-        image = Image.open(img_path)
-        label = self.img_labels.iloc[idx, 1]
-        if self.transform:
-            image = self.transform(image)
-
-        return image, label
 
 
 
