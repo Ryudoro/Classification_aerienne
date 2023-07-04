@@ -79,3 +79,12 @@ Projet
 
 ```
 
+## Utilisations du modèle
+
+Voici quelques exemples de ce que le modèle est capable de faire :
+
+![Exemple 1](Exemples/exemple1.png)
+*Exemple de détection et de classification sur une image aérienne*
+
+![Exemple 2](Exemples/exemple2.png)
+*Un autre exemple de détection et de classification sur une image aérienne*
