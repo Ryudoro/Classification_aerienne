@@ -2,6 +2,8 @@ import cv2
 import matplotlib.pyplot as plt
 import math
 import numpy as np
+
+#test image
 voiture = cv2.imread('JPEGImages/004053.jpg')
 
 # couleur HSV
